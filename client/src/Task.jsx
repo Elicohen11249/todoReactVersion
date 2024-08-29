@@ -8,7 +8,7 @@ console.log("in teask conpon..", task)
     const [file, setFile] = useState(null)
     const [previewDataUrl, setPreviewDataUrl] = useState()
     //const [u,setU]=useState(null)
-
+ 
     const onDrop = useCallback(acceptedFiles => {
         let file = acceptedFiles?.[0]
 

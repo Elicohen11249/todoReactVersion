@@ -13,11 +13,15 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Login setCurrentUser={setCurrentUser} />,
+      element: <Login setCurrentUser={setCurrentUser} />
     },
     {
       path:"/SignUp",
       element:<SignUp setCurrentUser={setCurrentUser}/>
+    },
+    {
+      path:"/Login",
+      element:<Login setCurrentUser={setCurrentUser}/>
     },
     {
       path: "/Todos",

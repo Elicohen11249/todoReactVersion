@@ -7,7 +7,7 @@ import db from '../controllers/db.js';
 
 
 async function verify(username, password, cb) {
-    console.log("inside the verify function");
+   // console.log("inside the verify function");
 
     try {
         const user = await db.oneOrNone(

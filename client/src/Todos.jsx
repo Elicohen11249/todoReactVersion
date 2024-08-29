@@ -37,7 +37,7 @@ export default function Todos() {
             console.log('Error fetching tasks:', error);
         }
     }
-
+ 
     useEffect(() => { loadTasks() }, [deleted])
 
 

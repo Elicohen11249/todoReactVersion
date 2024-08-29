@@ -3,7 +3,7 @@ import { createUser } from "../controllers/users.js";
 import multer from 'multer'
 
 const router = Router();
-
+/*
 const upload = multer({ dest: './uploads' })
 
 router.post('/upload-profile', upload.single('profile'),(req, res, next) => {
@@ -14,15 +14,16 @@ res.send({
     success:true
 })
 });
-
+*/
 
 router.post('/create', async (req, res, next) => {
     console.log(req.body)
     try{
         const user = await createUser(req.body);
-        console.log(user)
+        console.log("user",user)
         res.send(user);
     }catch(e){
+        console.log("error",e)
         next(e);
     }
 });

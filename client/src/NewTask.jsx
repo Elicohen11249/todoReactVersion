@@ -6,7 +6,10 @@ export default function NewTask({ updateTasks }) {
 
 
     async function submitHandler(event) {
+       
         event.preventDefault()
+        
+        if(event.target.newTask.value==false)return
         const response = await fetch('http://localhost:7000/tasks', {
             method: 'POST',
             mode: 'cors',

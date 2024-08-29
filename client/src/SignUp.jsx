@@ -2,6 +2,126 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import SignupSchema from "./SignupSchema.js";
 import { useCallback, useState } from "react";
+
+
+
+
+export default function SignUp({ setCurrentUser }) {
+    const navigate = useNavigate()
+    const [file, setFile] = useState(null)
+    const [previewDataUrl, setPreviewDataUrl] = useState()
+    
+/*
+    const onDrop = useCallback(acceptedFiles => {
+        let file = acceptedFiles?.[0]
+        setFile(file)
+
+        let fileReader = new FileReader()
+        if (file) {
+            fileReader.readAsDataURL(file)
+        }
+
+        fileReader.onloadend = function () {
+            //console.log(fileReader.result)
+            setPreviewDataUrl(fileReader.result)
+        }
+
+    }, [])
+*/
+
+    const formik = useFormik({
+        initialValues: {
+            username: '',
+            password: '',
+        },
+        onSubmit: signUpHandler,
+        validationSchema: SignupSchema
+    })
+
+
+/*
+    async function uploadFile() {
+        let formData = new FormData()
+        formData.append('profile', file)
+
+        const res = await fetch('http://localhost:7000/users/upload-profile', {
+            method: 'POST',
+            body: formData
+        })
+        let result = await res.json()
+        console.log(result)
+    }
+
+*/
+    async function signUpHandler(values) {  
+       
+        console.log(values)
+        const result = await fetch('http://localhost:7000/users/create', {
+            method: 'POST',
+            mode: 'cors',
+            //credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: values.username,
+                password: values.password
+            })
+        })
+        if(result){  
+        formik.values.username = ''
+        formik.values.password = ''
+        navigate('/login')
+        }
+    }
+
+    return (
+        <>
+            <form className="login-form" onSubmit={formik.handleSubmit}>
+                <h1>Sign up</h1>
+                <section className={"login-form__username " + (formik.touched.username ? (formik.errors.username ? 'invalid' : '') : '')}>
+                    <div>
+                        {" "}
+                        <label htmlFor="username">Username</label>
+                        <input
+                            value={formik.values.username}
+                            id="username"
+                            name="username"
+                            type="text"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        />
+                        <p>{formik.touched.username ? formik.errors.username : " "}</p>
+                    </div>
+                </section>
+
+                <section className={"login-form__password " + (formik.touched.password ? (formik.errors.password ? 'invalid' : '') : ' ')}>
+                    <div>
+                        <label htmlFor="password">Password</label>
+                        <input
+                            value={formik.values.password}
+                            id="password"
+                            name="password"
+                            type="password"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        />
+                        <p>{formik.touched.password ? formik.errors.password : " "}</p>
+                    </div>
+                </section>
+                <section className="login-form__actions">
+                    <button type="submit" className={formik.errors ? '' : 'disabled'}>Sign Up</button>
+                    <a onClick={() => navigate('/')}>Log In</a>
+                </section>
+            </form>
+        </>
+    );
+}
+
+/**
+ * 
+ * import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import SignupSchema from "./SignupSchema.js";
+import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 
@@ -62,13 +182,13 @@ export default function SignUp({ setCurrentUser }) {
     }
 
 
-    async function signUpHandler(values, event) {
-        event.preventDefault()
-        if (formik.errors) return;
+    async function signUpHandler(values) {  
+       
+        console.log(values)
         const result = await fetch('http://localhost:7000/users/create', {
             method: 'POST',
             mode: 'cors',
-            credentials: 'include',
+            //credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 name: values.username,
@@ -77,6 +197,7 @@ export default function SignUp({ setCurrentUser }) {
         })
         formik.values.username = ''
         formik.values.password = ''
+        console.log(values.username,values.password)
     }
 
     return (
@@ -134,6 +255,9 @@ export default function SignUp({ setCurrentUser }) {
 }
 
 
+
+ * 
+ */
 
 
 
