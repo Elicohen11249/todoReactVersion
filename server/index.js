@@ -8,6 +8,10 @@ import tasksRoute from './routes/tasks.js'
 import usersRoute from './routes/users.js'
 import authRoute from './routes/auth.js'
 import path from 'path'
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -17,7 +21,8 @@ if (!process.env.DATABASE_URL) {
 const PORT = process.env.PORT
 const app = express()
 app.use(cors({ 
-    origin:'http://localhost:5173',
+   origin:'http://localhost:5173',
+    //origin:'http://localhost:7000',
     credentials:true
 }))
 app.use(express.json())
@@ -28,9 +33,14 @@ app.use('/users', usersRoute)
 app.use('/auth',authRoute)
 
 
-//app.use('/app',express.static(path.join('..','client','dist')))
 app.use('/images', express.static('uploads'))
 
+app.use(express.static( path.join(__dirname,'..','client','dist')))
+
+// Fallback route to serve index.html for any other route
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
+});
 
 app.use((err,req,res,next)=>{
     res.status(500)
