@@ -1,6 +1,10 @@
 import { useState ,useEffect} from "react";
 
-export default function Title() {
+
+export default function Title(){
+  return(<h1>To Do App!</h1>)
+}
+/*export default function Title() {
 const [titling, setTitle ] = useState(null)
   const title = "To Do App!"
   
@@ -19,4 +23,4 @@ useEffect(()=>{ displayTitle()}, [])
   return (
     <h1>{titling }</h1>
   )
-} 
+} */

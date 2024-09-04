@@ -22,20 +22,20 @@ const PORT = process.env.PORT
 const app = express()
 app.use(cors({ 
    //origin:'http://localhost:5173',
-    origin:'http://localhost:7000',
+   // origin:'http://localhost:7000',
     credentials:true
 }))
+
+
 app.use(express.json())
 app.use(cookieParser('A-very-strong-secret'))
+app.use(express.static( path.join(__dirname,'..','client','dist')))
 app.use('/',rootRoute)
 app.use('/tasks', tasksRoute)
 app.use('/users', usersRoute)
 app.use('/auth',authRoute)
-
-
 app.use('/images', express.static('uploads'))
 
-app.use(express.static( path.join(__dirname,'..','client','dist')))
 
 // Fallback route to serve index.html for any other route
 app.get('*', (req, res) => {
