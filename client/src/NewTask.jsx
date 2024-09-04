@@ -10,7 +10,7 @@ export default function NewTask({ updateTasks }) {
         event.preventDefault()
         
         if(event.target.newTask.value==false)return
-        const response = await fetch('http://localhost:7000/tasks', {
+        const response = await fetch('http://134.122.15.236:7000/tasks', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',

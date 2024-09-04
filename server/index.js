@@ -20,7 +20,8 @@ if (!process.env.DATABASE_URL) {
 }
 const PORT = process.env.PORT
 const app = express()
-//app.use(cors({ origin:'http://localhost:5173',credentials:true}))
+const allowedOrigins = ['http://localhost:7000', 'http://134.122.15.236:7000']
+app.use(cors({ origin: allowedOrigins, credentials:true}))
 
 
 app.use(express.json())

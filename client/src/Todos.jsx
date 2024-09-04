@@ -27,7 +27,7 @@ export default function Todos() {
 
     async function loadTasks() {
         try {
-            const response = await fetch('http://localhost:7000/tasks', {
+            const response = await fetch('http://134.122.15.236:7000/tasks', {
                 mode: 'cors',
                 credentials: 'include'
             });

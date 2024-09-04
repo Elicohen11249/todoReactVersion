@@ -56,7 +56,7 @@ export default function SignUp({ setCurrentUser }) {
     async function signUpHandler(values) {  
        
         console.log(values)
-        const result = await fetch('http://localhost:7000/users/create', {
+        const result = await fetch('http://134.122.15.236:7000/users/create', {
             method: 'POST',
             mode: 'cors',
             //credentials: 'include',

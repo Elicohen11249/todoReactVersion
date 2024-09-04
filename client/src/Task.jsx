@@ -41,7 +41,7 @@ console.log("in teask conpon..", task)
     async function taskCompleted() {
         const id = task.id
 
-        await fetch(`http://localhost:7000/tasks/${id}`, {
+        await fetch(`http://134.122.15.236:7000/tasks/${id}`, {
             method: 'PATCH',
             mode: 'cors',
             credentials: 'include'
@@ -57,7 +57,7 @@ console.log("in teask conpon..", task)
         if (confirming == true) {
             const id = task.id
 
-            await fetch(`http://localhost:7000/tasks/${id}`, {
+            await fetch(`http://134.122.15.236:7000/tasks/${id}`, {
                 method: 'DELETE',
                 mode: 'cors',
                 credentials: 'include'
@@ -71,7 +71,7 @@ console.log("in teask conpon..", task)
         let formData = new FormData()
         formData.append('taskImage', file)
 
-        const res = await fetch(`http://localhost:7000/tasks/add-image/${task.id}`, {
+        const res = await fetch(`http://134.122.15.236:7000/tasks/add-image/${task.id}`, {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',

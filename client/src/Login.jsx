@@ -9,7 +9,7 @@ export default function Login({setCurrentUser}) {
     async function loginHandler(event) {
         event.preventDefault()
 
-        const result = await fetch("http://localhost:7000/auth/login", {
+        const result = await fetch("http://134.122.15.236:7000/auth/login", {
           method: "POST",
           mode: "cors",
           credentials: "include",
